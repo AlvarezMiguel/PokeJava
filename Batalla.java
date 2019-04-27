@@ -54,15 +54,8 @@ public String IniciarJuego(){
 		
 
 
-		double vel1=jugadoruno.pokemones[numPokemon1-1].getVelocidad();
-		double vel2=jugadordos.pokemones[numPokemon2-1].getVelocidad();
-			
-			if(vel1 >= vel2 )
-				System.out.println("Inicia "+jugadoruno.pokemones[numPokemon1-1].getApodo());
-			else
-			System.out.println("Inicia "+jugadoruno.pokemones[numPokemon2-1].getApodo());
-
-		Turnos(jugadoruno,jugadordos);
+		PrimerTurno(jugadoruno.pokemones[numPokemon1-1],jugadoruno.pokemones[numPokemon2-1]);
+		Turnos(jugadoruno.pokemones[numPokemon1-1],jugadoruno.pokemones[numPokemon2-1]);
 
 
 
@@ -71,18 +64,27 @@ public String IniciarJuego(){
 		return "fin";
 
 		}
+	
+	public  void PrimerTurno (Pokemon pokeuno,Pokemon pokedos){
+		if( pokeuno.getVelocidad()>= pokedos.getVelocidad())
+				System.out.println("Inicia "+pokeuno.getApodo());
+			else
+			System.out.println("Inicia "+pokedos.getApodo());
+	}
 
-	public String Turnos(Jugador jugadoruno,Jugador jugadordos){
+
+
+	public String Turnos(Pokemon pokeuno,Pokemon pokedos){
 
 		int contador =1;
 		int turno=0;
 		turno = contador%2;
 		
 		if (turno == 0 ){
-			System.out.println("Turno de :" + jugadordos.getNombre());
+			System.out.println("Turno de :" +pokeuno.getApodo());
 
 		}else{
-			System.out.println("Turno de :" + jugadoruno.getNombre());
+			System.out.println("Turno de :" + pokedos.getApodo());
 		}
 
 
