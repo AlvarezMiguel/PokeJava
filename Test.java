@@ -7,6 +7,7 @@ public class Test{
 
 		Batalla nuevaBatalla= new Batalla();
 		nuevaBatalla.IniciarJuego();
+
 	
 	}
 }
