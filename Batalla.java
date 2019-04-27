@@ -37,7 +37,7 @@ public String IniciarJuego(){
 		
 		System.out.println("Comienza el juego, elige tu pokemon "+ jugadoruno.getNombre());
 		String pokemon= entrada.nextLine();
-		System.out.println("Elegiste a "+" "+jugadoruno.pokemones[i].getApodo());
+		//System.out.println("Elegiste a "+" "+jugadoruno.pokemones[i].getApodo());
 				
 
 
