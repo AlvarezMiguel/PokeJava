@@ -56,6 +56,8 @@ public String IniciarJuego(){
 		
 	
 		PrimerTurno(jugadoruno.pokemones[numPokemon1-1],jugadordos.pokemones[numPokemon2-1],jugadoruno,jugadordos);
+		int contador = 1;
+		getTurno(contador,jugadoruno,jugadordos);
 
 		//Turnos(jugadoruno.pokemones[numPokemon1-1],jugadoruno.pokemones[numPokemon2-1]);
 
@@ -66,7 +68,9 @@ public String IniciarJuego(){
 		}
 	
 	public  void PrimerTurno (Pokemon pokeuno,Pokemon pokedos, Jugador jugauno, Jugador jugados){
+
 		if( pokeuno.getVelocidad()>= pokedos.getVelocidad()){ //inicia pokemon 1
+			int contador_turno = 1;
 			System.out.println("Inicia :"+pokeuno.getApodo()+ " de "+ jugauno.getNombre());
 			Scanner entrada =new Scanner(System.in);
 			System.out.println("¿Qué realizarás?  1)Usar pocion 2)Ataque 3)Ataque especial");
@@ -75,41 +79,60 @@ public String IniciarJuego(){
 				switch (opcion){
 					case 1: 
 					EleccionPocion(pokeuno,pokedos,jugauno,jugados);
+					getTurno(contador_turno, jugauno,jugados);
 
-					break;
+					//break;
 					case 2:
 					EleccionAtaque(pokeuno,pokedos,jugauno,jugados);
-					
-					break;
+					getTurno(contador_turno, jugauno,jugados);
+
+					//break;
 					case 3:
 					//float multip=EleccionAtaqueEspecial(pokeuno,pokedos,jugauno,jugados);
 
 					}	
 				}
+		else{
+			int contador_turno = 0;
+			System.out.println("Inicia :"+pokedos.getApodo()+ " de "+ jugados.getNombre());
+			Scanner entrada =new Scanner(System.in);
+			System.out.println("¿Qué realizarás?  1)Usar pocion 2)Ataque 3)Ataque especial");
+			Integer opcion=entrada.nextInt();
+			
+				switch (opcion){
+					case 1: 
+					EleccionPocion(pokedos,pokeuno,jugados,jugauno);
+					getTurno(contador_turno, jugauno,jugados);
+
+					//break;
+					case 2:
+					EleccionAtaque(pokedos,pokeuno,jugados,jugauno);
+					//break:
+				}
 
 	}
+}
 
 
-	public String Turnos(Pokemon pokeuno,Pokemon pokedos){
-
-		int contador =1;
+public void getTurno(int contador_turno, Jugador jugauno, Jugador jugados){
 		int turno=0;
-		turno = contador%2;
-		
+		turno = contador_turno%2;
 		if (turno == 0 ){
-			System.out.println("Turno de :" +pokeuno.getApodo());
+		Scanner entrada =new Scanner(System.in);
+		System.out.println("Turno de :" + jugauno.getNombre());
+		System.out.println("Elige tu pokemon "+ jugauno.getNombre());
+		Integer numPokemon1=entrada.nextInt();
+		System.out.println("Elegiste a "+" "+jugauno.pokemones[numPokemon1-1].getApodo());
+		System.out.println("Velocidad :"+jugauno.pokemones[numPokemon1-1].getVelocidad());
+		
+		System.out.println("Elige tu pokemon "+ jugados.getNombre());
+		Integer numPokemon2=entrada.nextInt();
+		System.out.println("Elegiste a "+" "+jugados.pokemones[numPokemon2-1].getApodo());
+		System.out.println("Velocidad :"+jugados.pokemones[numPokemon2-1].getVelocidad());
 
-		}else{
-			System.out.println("Turno de :" + pokedos.getApodo());
 		}
-
-
-		return "turno";
-	}
-
-
-
-
+	
+}
 
 
 	public void EleccionPocion(Pokemon pokeuno,Pokemon pokedos, Jugador jugauno, Jugador jugados){
@@ -120,6 +143,7 @@ public String IniciarJuego(){
 								if (jugauno.pociones[0].tipoPocion!="*") {	
 								pokeuno.RecibirVidaPocion();
 								jugauno.pociones[0].tipoPocion="*";
+								
 							}else {System.out.println("Ya usaste esa poción");}
 														
 							if(opcion==2)
@@ -148,8 +172,6 @@ public void EleccionAtaque(Pokemon pokeuno,Pokemon pokedos, Jugador jugauno, Jug
 		
 		
 }
-
-
 
 public double MultiplicadorElemental(Pokemon atacante, Pokemon atacado ){
 		double multiplicador=1;
