@@ -13,28 +13,18 @@ public class Jugador{
 	public String getNombre(){
 		return nombre;
 	}
-
-	public void getPokemones()
-	{
-	
-	}
-
 	public Pocion[] getPociones(){
 		return pociones;
 	}
 
 	public String ListarPokemones(Jugador jugador){
 
-		System.out.println("Los Pokemones de "+ jugador.getNombre());
+		System.out.println("  Los Pokemones de "+ jugador.getNombre());
 		for (int i=0;i<6 ;i++ ) {
-		System.out.println(pokemones[i].getApodo());
+		System.out.println("	"+(i+1)+")" +pokemones[i].getApodo());
 		}
-		return "______";
+		System.out.println();
+		return "	************";
 	}
-
-
-
-
-
 
 }

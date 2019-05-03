@@ -51,11 +51,6 @@ public class Pokemon {
 
 //Métodos Pokemon
 
-// 	public double RecibirDanio(){
-
-
-// 	}
-
 	public void RecibirVidaPocion(){ 
 		vida =vida + vida*.2;
 		
@@ -71,18 +66,5 @@ public class Pokemon {
  		defensa=defensa+ defensa*.1;
  		System.out.println("La  defensa de "+apodo+ "es de "+defensa);
  	}
-
-// 	public double RealizarAtaque1(){
-
-// 	}
-
-// 	public double RealizarAtaque2(){
-		
-// 	}
-
-
-// public double RecibirAtaque(){
-
-// }
 
 }
