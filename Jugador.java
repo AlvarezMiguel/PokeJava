@@ -20,7 +20,7 @@ public class Jugador{
 ///Modificar este método para que imprima sólo los pokemones cuya vida sea mayor a 0
 	public String ListarPokemones(Jugador jugador){
 
-		System.out.println("\n"+jugador.getNombre() + "tus pokemones son");
+		System.out.println("\n"+jugador.getNombre() + " tus pokemones disponibles son");
 		for (int i=0;i<6 ;i++ ) {
 		System.out.println("	"+(i+1)+")" +pokemones[i].getApodo());
 		}

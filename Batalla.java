@@ -68,7 +68,7 @@ public String IniciarJuego()
 		
 		int turno;
 
-		while((arrayPokemon1[pokeuno-1].getVida()>0) && (arrayPokemon2[pokedos-1].getVida()>0)) //Condicion que continúa el juego
+		while((arrayPokemon1[pokeuno-1].getVida()>0) && (arrayPokemon2[pokedos-1].getVida()>0)) //Condicion que continúa el juego implementar funcion que sume la vida de todos los pokemones de cada jugador y verifique que sea mayor a cero
 		{
 			turno = contador%2;
 			if (turno == 0){
