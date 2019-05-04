@@ -2,25 +2,27 @@ import java.util.Scanner;
 
 public class Batalla {
 
-Pokemon	arrayPokemon1[]= new Pokemon[6];
-Pokemon	arrayPokemon2[]= new Pokemon[6];
-Pocion arrayPocion1[]= new Pocion[3];
-Pocion arrayPocion2[]=new Pocion[3];
+Pokemon	arrayPokemon1[]= new Pokemon[7];
+Pokemon	arrayPokemon2[]= new Pokemon[7];
+Pocion arrayPocion1[]= new Pocion[4];
+Pocion arrayPocion2[]=new Pocion[4];
 public String IniciarJuego()
 {
-	arrayPokemon1[0]= new Pokemon("Pikachu",300,50,"OK","Electrico",190,60);
-				arrayPokemon1[1]= new Pokemon("Bulbasaur",200,180,"OK","Hierba",100,141);
-				arrayPokemon1[2]= new Pokemon("Ivysaur",160,155,"OK","Hierba",111,152);
-				arrayPokemon1[3]= new Pokemon("Snorlax",240,180,"OK","Normal",100,180);
-				arrayPokemon1[4]= new Pokemon("Miau",100,100,"OK","Normal",100,100);
-				arrayPokemon1[5]= new Pokemon("Ratata",100,100,"OK","Normal",100,100);
+	arrayPokemon1[0]= new Pokemon("Pikachu",180,130,"OK","Electrico",130,150);
+				arrayPokemon1[1]= new Pokemon("Bulbasaur",180,130,"OK","Hierba",130,150);
+				arrayPokemon1[2]= new Pokemon("Ivysaur",180,130,"OK","Hierba",130,150);
+				arrayPokemon1[3]= new Pokemon("Snorlax",200,130,"OK","Normal",120,150);
+				arrayPokemon1[4]= new Pokemon("Miau",180,130,"OK","Normal",130,150);
+				arrayPokemon1[5]= new Pokemon("Ratata",180,130,"OK","Normal",130,150);
+				arrayPokemon1[6]= new Pokemon("Ratata",180,130,"OK","Normal",130,150);
 	
-	arrayPokemon2[0]= new Pokemon("Pikachu",300,50,"OK","Electrico",190,60);
-				arrayPokemon2[1]= new Pokemon("Bulbasaur",100,100,"OK","Hierba",100,100);
-				arrayPokemon2[2]= new Pokemon("Ivysaur",100,100,"OK","Hierba",100,100);
-				arrayPokemon2[3]= new Pokemon("Snorlax",100,100,"OK","Normal",100,100);
-				arrayPokemon2[4]= new Pokemon("Miau",100,100,"OK","Normal",100,100);
-				arrayPokemon2[5]= new Pokemon("Ratata",100,100,"OK","Normal",100,100);
+	arrayPokemon2[0]= new Pokemon("Pikachu",180,130,"OK","Electrico",130,150);
+				arrayPokemon2[1]= new Pokemon("Bulbasaur",180,130,"OK","Hierba",130,150);
+				arrayPokemon2[2]= new Pokemon("Charmader",180,130,"OK","Fuego",130,150);
+				arrayPokemon2[3]= new Pokemon("Snorlax",200,130,"OK","Normal",120,150);
+				arrayPokemon2[4]= new Pokemon("Chicorita",180,130,"OK","Hierba",130,150);
+				arrayPokemon2[5]= new Pokemon("Ratata",180,130,"OK","Normal",130,150);
+				arrayPokemon2[6]= new Pokemon("Ratata",180,130,"OK","Normal",130,150);
 
 	arrayPocion1[0]= new Pocion("vida");
 		arrayPocion1[1]= new	Pocion("ataque");
@@ -40,7 +42,7 @@ public String IniciarJuego()
 	Jugador jugadordos= new Jugador(nombredos,arrayPocion2,arrayPokemon2);
 	
 	System.out.println(jugadoruno.ListarPokemones(jugadoruno));
-	System.out.println(jugadoruno.ListarPokemones(jugadordos));  			
+	System.out.println(jugadordos.ListarPokemones(jugadordos));  			
 	System.out.println();		
 	System.out.println("***Comienza el juego***");
 	System.out.println();
@@ -52,10 +54,14 @@ public String IniciarJuego()
 	Integer contador,t1,t2;
 	 
 	contador=1;
-	if (arrayPokemon1[pokeuno].getVelocidad()>= arrayPokemon2[pokedos].getVelocidad())
-		t1 = Turno(arrayPokemon1[pokeuno-1],arrayPokemon2[pokedos-1],jugadoruno,jugadordos);
-	else 
-		t2 =Turno(arrayPokemon2[pokedos-1],arrayPokemon1[pokeuno-1],jugadordos,jugadoruno);
+	if ((arrayPokemon1[pokeuno-1].getVelocidad()) >= (arrayPokemon2[pokedos-1].getVelocidad())){
+		System.out.println();
+		System.out.println("inciará jugador 1");
+		t1 = Turno(arrayPokemon1[pokeuno-1],arrayPokemon2[pokedos-1],jugadoruno,jugadordos);}
+	
+	else {
+		System.out.println("iniciará jugador 2");
+		t2 =Turno(arrayPokemon2[pokedos-1],arrayPokemon1[pokeuno-1],jugadordos,jugadoruno);}
 
 	
 		//Scanner entrada =new Scanner(System.in);
@@ -75,14 +81,14 @@ public String IniciarJuego()
 			t2 =Turno(arrayPokemon2[pokedos-1],arrayPokemon1[pokeuno-1],jugadordos,jugadoruno);
 
 		}
-		contador++;
+		++contador;
 	}
 return "Fin";
 }
 
 
 public int EligePokemon (Jugador jugador, Pokemon[] pokemones){
-	Scanner entrada =new Scanner(System.in); 
+	Scanner entrada = new Scanner(System.in); 
 	System.out.println("Elige tu pokemon "+ jugador.getNombre());
 	Integer numPokemon=entrada.nextInt();
 	System.out.println("Elegiste a "+" "+jugador.pokemones[numPokemon-1].getApodo());
@@ -91,11 +97,23 @@ public int EligePokemon (Jugador jugador, Pokemon[] pokemones){
 	return numPokemon;
 }
 
+public int ElegirPokemon (Jugador jugador, Pokemon[] pokemones){
+	System.out.println(jugador.ListarPokemones(jugador));
+	Scanner entrada = new Scanner(System.in); 
+	System.out.println("\nCon qué pokemon deseas continuar  "+ jugador.getNombre()+" ?");
+	Integer numPokemon=entrada.nextInt();
+	System.out.println("Elegiste a "+" "+jugador.pokemones[numPokemon-1].getApodo());
+	System.out.println("Velocidad :"+jugador.pokemones[numPokemon-1].getVelocidad());
+	System.out.println();
+	return numPokemon;
+}
+
+
+
 public  int Turno (Pokemon patacante ,Pokemon patacado, Jugador jatacante, Jugador jatacado)
 {
 
 	
-	EligePokemon(jatacante, jatacante.pokemones);
 	System.out.println("");
 	System.out.println("Turno de: "+ patacante.getApodo() + " de "+ jatacante.getNombre());
 	Scanner entrada =new Scanner(System.in);
@@ -111,6 +129,8 @@ public  int Turno (Pokemon patacante ,Pokemon patacado, Jugador jatacante, Jugad
 		case 3:
 		//float multip=EleccionAtaqueEspecial(pokeuno,pokedos,jugauno,jugados);
 	}
+
+	ElegirPokemon(jatacante, jatacante.pokemones);
 	return 0;
 }
 
@@ -161,7 +181,7 @@ public void EleccionAtaque(Pokemon patacante,Pokemon patacado, Jugador jatacante
 		System.out.println("La vida del "+ patacado.getApodo()+" de " + jatacado.getNombre() +" es "+ vida);
 	}
 		else{
-			System.out.println("La defensa de "+ patacado.getApodo()+ " es mayor al ataque de "+ patacante.getApodo());
+			System.out.println("La defensa de "+ patacado.getApodo()+ " es mayor al ataque de "+ patacante.getApodo()+"\n");
 		}	
 }
 
