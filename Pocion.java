@@ -7,5 +7,9 @@ public class Pocion{
 		this.tipoPocion=tipoPocion;
 	} 
 
+	public String getTipo(){
+		return tipoPocion;
+	}
+
 
 }

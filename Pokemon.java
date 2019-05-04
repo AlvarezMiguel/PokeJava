@@ -60,11 +60,11 @@ public class Pokemon {
  	public void RecibirAtaquePocion(){
  		ataque= ataque+ ataque*.1;
 
- 		System.out.println("El ataque de "+apodo+" es de "+ ataque);
+ 		
  	}
  	public void RecibirDefensaPocion(){
  		defensa=defensa+ defensa*.1;
- 		System.out.println("La  defensa de "+apodo+ "es de "+defensa);
+ 		
  	}
 
 }

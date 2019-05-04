@@ -4,27 +4,30 @@ public class Batalla {
 
 Pokemon	arrayPokemon1[]= new Pokemon[6];
 Pokemon	arrayPokemon2[]= new Pokemon[6];
-Pocion arrayPocion[]= new Pocion[3];
-
+Pocion arrayPocion1[]= new Pocion[3];
+Pocion arrayPocion2[]=new Pocion[3];
 public String IniciarJuego()
 {
-	arrayPokemon1[0]= new Pokemon("Pikachu",250,150,"OK","Electrico",190,200);
+	arrayPokemon1[0]= new Pokemon("Pikachu",300,50,"OK","Electrico",190,60);
 				arrayPokemon1[1]= new Pokemon("Bulbasaur",200,180,"OK","Hierba",100,141);
 				arrayPokemon1[2]= new Pokemon("Ivysaur",160,155,"OK","Hierba",111,152);
 				arrayPokemon1[3]= new Pokemon("Snorlax",240,180,"OK","Normal",100,180);
 				arrayPokemon1[4]= new Pokemon("Miau",100,100,"OK","Normal",100,100);
 				arrayPokemon1[5]= new Pokemon("Ratata",100,100,"OK","Normal",100,100);
 	
-	arrayPokemon2[0]= new Pokemon("Pikachu",100,100,"OK","Electrico",190,100);
+	arrayPokemon2[0]= new Pokemon("Pikachu",300,50,"OK","Electrico",190,60);
 				arrayPokemon2[1]= new Pokemon("Bulbasaur",100,100,"OK","Hierba",100,100);
 				arrayPokemon2[2]= new Pokemon("Ivysaur",100,100,"OK","Hierba",100,100);
 				arrayPokemon2[3]= new Pokemon("Snorlax",100,100,"OK","Normal",100,100);
 				arrayPokemon2[4]= new Pokemon("Miau",100,100,"OK","Normal",100,100);
 				arrayPokemon2[5]= new Pokemon("Ratata",100,100,"OK","Normal",100,100);
 
-	arrayPocion[0]= new Pocion("vida");
-	arrayPocion[1]= new	Pocion("ataque");
-	arrayPocion[2]= new	Pocion("defensa");
+	arrayPocion1[0]= new Pocion("vida");
+		arrayPocion1[1]= new	Pocion("ataque");
+		arrayPocion1[2]= new	Pocion("defensa");
+	arrayPocion2[0]= new Pocion("vida");
+		arrayPocion2[1]= new	Pocion("ataque");
+		arrayPocion2[2]= new	Pocion("defensa");
 
 	Scanner entrada =new Scanner(System.in); 
 
@@ -33,8 +36,8 @@ public String IniciarJuego()
 	System.out.println("Ingrese nombre del jugador dos: ");
 	String nombredos = entrada.nextLine();
 
-	Jugador jugadoruno= new Jugador(nombreuno,arrayPocion,arrayPokemon1);
-	Jugador jugadordos= new Jugador(nombredos,arrayPocion,arrayPokemon2);
+	Jugador jugadoruno= new Jugador(nombreuno,arrayPocion1,arrayPokemon1);
+	Jugador jugadordos= new Jugador(nombredos,arrayPocion2,arrayPokemon2);
 	
 	System.out.println(jugadoruno.ListarPokemones(jugadoruno));
 	System.out.println(jugadoruno.ListarPokemones(jugadordos));  			
@@ -46,18 +49,20 @@ public String IniciarJuego()
 	Integer pokedos=EligePokemon(jugadordos,arrayPokemon2); //número de pokemon del jugador 2
 
 	//¿Quién inicia?
-	Integer t1;
+	Integer contador,t1,t2;
+	 
+	contador=1;
 	if (arrayPokemon1[pokeuno].getVelocidad()>= arrayPokemon2[pokedos].getVelocidad())
 		t1 = Turno(arrayPokemon1[pokeuno-1],arrayPokemon2[pokedos-1],jugadoruno,jugadordos);
 	else 
-		t1 =Turno(arrayPokemon2[pokedos-1],arrayPokemon1[pokeuno-1],jugadordos,jugadoruno);
+		t2 =Turno(arrayPokemon2[pokedos-1],arrayPokemon1[pokeuno-1],jugadordos,jugadoruno);
 
-	while(true){
+	
 		//Scanner entrada =new Scanner(System.in);
-		int contador =1;
+		
 		int turno;
 
-		while(contador<10) //Condicion que continúa el juego
+		while((arrayPokemon1[pokeuno-1].getVida()>0) && (arrayPokemon2[pokedos-1].getVida()>0)) //Condicion que continúa el juego
 		{
 			turno = contador%2;
 			if (turno == 0){
@@ -67,13 +72,12 @@ public String IniciarJuego()
 		}
 		else{
 			//Métodos para el juego dos 
-			t1 =Turno(arrayPokemon2[pokedos-1],arrayPokemon1[pokeuno-1],jugadordos,jugadoruno);
+			t2 =Turno(arrayPokemon2[pokedos-1],arrayPokemon1[pokeuno-1],jugadordos,jugadoruno);
 
 		}
 		contador++;
-		}
-}
-
+	}
+return "Fin";
 }
 
 
@@ -89,8 +93,9 @@ public int EligePokemon (Jugador jugador, Pokemon[] pokemones){
 
 public  int Turno (Pokemon patacante ,Pokemon patacado, Jugador jatacante, Jugador jatacado)
 {
-	int contador = 1;
-	contador ++;
+
+	
+	EligePokemon(jatacante, jatacante.pokemones);
 	System.out.println("");
 	System.out.println("Turno de: "+ patacante.getApodo() + " de "+ jatacante.getNombre());
 	Scanner entrada =new Scanner(System.in);
@@ -106,17 +111,22 @@ public  int Turno (Pokemon patacante ,Pokemon patacado, Jugador jatacante, Jugad
 		case 3:
 		//float multip=EleccionAtaqueEspecial(pokeuno,pokedos,jugauno,jugados);
 	}
-	return contador;
+	return 0;
 }
 
 	//Eleccion de la poción  
-	public void EleccionPocion(Pokemon atacante,Pokemon patacado, Jugador jatacante, Jugador jatacado){
-		System.out.println("1)De vida 2)De ataque 3)Defensa");
+	public void EleccionPocion(Pokemon patacante,Pokemon patacado, Jugador jatacante, Jugador jatacado){
+		System.out.println("Tus pocinoes disponibles son...");
+			for(int i=0; i<3; i++ )
+				System.out.println(jatacante.pociones[i].getTipo());
+		System.out.println("\n1)De vida 2)De ataque 3)Defensa");
+		
+
 		Scanner entrada =new Scanner(System.in);
 		Integer opcion=entrada.nextInt();
 		if(opcion==1)
 			if (jatacante.pociones[0].tipoPocion!="*") {	
-			atacante.RecibirVidaPocion();
+			patacante.RecibirVidaPocion();
 			jatacante.pociones[0].tipoPocion="*";
 
 
@@ -124,15 +134,17 @@ public  int Turno (Pokemon patacante ,Pokemon patacado, Jugador jatacante, Jugad
 									
 		if(opcion==2)
 			if (jatacante.pociones[1].tipoPocion!="*") {	
-			atacante.RecibirAtaquePocion();
+			patacante.RecibirAtaquePocion();
 			jatacante.pociones[1].tipoPocion="*";
+			System.out.println("El ataque del " + patacante.getApodo()+" de "+ jatacante.getNombre()+" es de "+ patacante.getAtaque());
 		}else {System.out.println("Ya usaste esa poción");}
 		
 
 		if(opcion==3)
 			if (jatacante.pociones[2].tipoPocion!="*") {	
-			atacante.RecibirDefensaPocion();
+			patacante.RecibirDefensaPocion();
 			jatacante.pociones[2].tipoPocion="*";
+			System.out.println("La defensa del " + patacante.getApodo()+ " de "+ jatacante.getNombre() +" es de "+ patacante.getDefensa());
 		}else {System.out.println("Ya usaste esa poción");}
 }
 
@@ -141,11 +153,16 @@ public  int Turno (Pokemon patacante ,Pokemon patacado, Jugador jatacante, Jugad
 public void EleccionAtaque(Pokemon patacante,Pokemon patacado, Jugador jatacante, Jugador jatacado){
 		System.out.println("Atacando a " + patacado.getApodo() +" de " + jatacado.getNombre());
 		double multi=MultiplicadorElemental(patacante,patacado);
-		double ataque =((patacante.getAtaque()- patacado.getDefensa())*(multi));
 
-		System.out.println(ataque);
+		double ataque =((patacante.getAtaque()- patacado.getDefensa())*(multi));
+		if (ataque>0){
+		System.out.println("El ataque es de "+ataque);
 		double vida =patacado.setVida(ataque);
-		System.out.println("La vida del "+ patacado.getApodo()+" de " + jatacado.getNombre() +" es "+ vida);	
+		System.out.println("La vida del "+ patacado.getApodo()+" de " + jatacado.getNombre() +" es "+ vida);
+	}
+		else{
+			System.out.println("La defensa de "+ patacado.getApodo()+ " es mayor al ataque de "+ patacante.getApodo());
+		}	
 }
 
 public double MultiplicadorElemental(Pokemon atacante, Pokemon atacado ){
